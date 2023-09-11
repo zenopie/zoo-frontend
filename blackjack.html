@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+    <link rel="stylesheet" type="text/css" href="/assets/css/blackjack.css">
+	<link href="./assets/css/style.css" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <title>Blackjack</title>
+</head>
+
+<body>
+	<script src="https://www.unpkg.com/secretjs/dist/browser.js" ></script>
+	<script src="assets/js/global.js"></script>
+	<script src="assets/js/deck.js"></script>
+	<div class="sidenav">
+		<ul>
+			<li>
+				<a href="/index.html">
+					<img class="logo" src = "/assets/images/zoo.svg" alt="My Happy SVG"/>
+				</a>
+			</li>
+			<li>
+				<a href="/raffle.html">
+					<img id="raffle"; src = "/assets/images/ticket.png" alt="My Happy SVG"/>
+				</a>
+			</li>
+			<li>
+				<a href="/index.html">
+					<img id="roulette"; src = "/assets/images/roulette.svg" alt="My Happy SVG"/>
+				</a>
+			</li>
+			<li>
+				<a href="/blackjack.html">
+					<img id="blackjack" src = "/assets/images/playing-cards.png" alt="My Happy SVG"/>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<ul class="topnav">
+		<li class="topnavli"><a id="table-nav" class="active" href="#table">Table</a></li>
+		<li class="topnavli"><a id="rules-nav" href="#rules">Rules</a></li>
+	</ul>
+    <div id="show-rules" class="remove">
+		<h1>RULES</h1>
+		<h3>House Edge 0.131%</h3>
+        <p>The goal of blackjack is to beat the dealer's hand without going over 21.</p>
+        <p>Face cards are worth 10. Aces are worth 1 or 11, whichever makes a better hand.</p>
+		<p>If the dealer's face up card is 10 or an ace the dealer will check for blackjack.</p>
+		<p>Insurance is a bet equal to half your original bet and pays out 2 to 1 if the dealer has blackjack</p>
+		<p>A dealer blackjack wins all hands except against a player blackjack</p>
+		<p>If you are dealt 21 from the start (Ace & 10), you got a blackjack</p>
+        <p>Blackjack pays out 3/2 plus your original bet</p>
+		<p>A push result means the player and the dealer tie and the player gets back their original bet</p>
+		<p>A win result means the player gets back their bet, plus an amount equal to their bet</p>
+        <p>To 'Hit' is to ask for another card. To 'Stand' is to hold your total and end your turn.</p>
+        <p>If you go over 21 you bust, and the dealer wins regardless of the dealer's hand.</p>
+        <p>Dealer will hit until his/her cards total 17 or higher.</p>
+        <p>Doubling is like a hit, only the bet is doubled and you only get one more card.</p>
+		<p>You can only Double Down on a deal of 10 or 11</p>
+        <p>Split can be done when you have two of the same card - the pair is split into two hands.</p>
+        <p>Splitting also doubles the bet, because each new hand is worth the original bet.</p>
+		<p>Surrendering gives up your hand and pays back half your bet</p>
+        <p>You can only double/split/surrender on the first move</p>
+	</div>
+
+    
+    
+
+    <div id="blackjack-table">
+		
+        <div class="cash-bet">
+            <h2 id="cash"></h2>
+            <h2 id="bet"></h2>
+        </div>
+        <div id="dealer_cards">
+		</div>
+		
+		<img id="headerimage" src = "/assets/images/dealer-pays.png" alt="My Happy SVG"/>
+		
+		
+        <div id="middle">
+			<div id="buttons" class="noPointerEvents">
+			</div>
+			<div id="betAlert" class="cover">
+				<p>PLACE BETS</p>
+				<div>
+					<button id="done">DEAL</button>
+				</div>
+			</div>
+			<div id="resultMessage" class="remove">
+			</div>
+			<div id="insurance_message" class="remove">
+			</div>
+			<div id="chips-table" class="chips-table">
+				<div id="Chips-1" class="chips" style="background-image: url(https://i.ibb.co/z2LdPc1/chip-1.png);"></div>
+				<div id="Chips-5" class="chips" style="background-image: url(https://i.ibb.co/0BzgbTp/chip-5.png);"></div>
+				<div id="Chips-10" class="chips" style="background-image: url(https://i.ibb.co/MCgrjTf/chip-10.png);"></div>
+				<div id="Chips-20" class="chips" style="background-image: url(https://i.ibb.co/c1kW6w5/chip-20.png);"></div>
+				<div id="Chips-50" class="chips" style="background-image: url(https://i.ibb.co/FqCFTsN/chip-50.png);"></div>
+				<div id="Chips-100" class="chips" style="background-image: url(https://i.ibb.co/x199Xrw/chip-100.png);"></div>
+			</div>
+		</div>
+		<div id="player_cards">
+
+        </div>
+    </div>
+
+    
+
+    <script src="assets/js/blackjack.js"></script>
+</body>

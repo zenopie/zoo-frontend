@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<title>Raffle</title>
+	<meta name="title" content="Raffle">
+	<meta name="description" content="A fully functioning roulette game made using Javascript and CSS">
+	<meta name="author" content="ozboware">
+	<meta property="og:url" content="/">
+	<meta property="og:title" content="Javascript Roulette">
+	<meta property="og:description" content="A fully functioning roulette game made using Javascript and CSS">
+	<link href="./assets/css/style.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="/assets/css/odometer-theme-slot-machine.css" />
+</head>
+
+<body>
+	<script src="https://www.unpkg.com/secretjs/dist/browser.js" ></script>
+	<script src="assets/js/odometer.js"></script>
+	<script src="assets/js/global.js"></script>
+	
+	
+
+	<div class="sidenav">
+		<ul>
+			<li>
+				<a href="/index.html">
+					<img class="logo" src = "/assets/images/zoo.svg" alt="My Happy SVG"/>
+				</a>
+			</li>
+			<li>
+				<a href="/raffle.html">
+					<img id="raffle"; src = "/assets/images/ticket.png" alt="My Happy SVG"/>
+				</a>
+			</li>
+			<li>
+				<a href="/index.html">
+					<img id="roulette"; src = "/assets/images/roulette.svg" alt="My Happy SVG"/>
+				</a>
+			</li>
+			<li>
+				<a href="/blackjack.html">
+					<img id="blackjack" src = "/assets/images/playing-cards.png" alt="My Happy SVG"/>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<ul class="topnav">
+		<li class="topnavli"><a class="active" href="#jackpot">Jackpot</a></li>
+		<li class="topnavli"><a href="#rules">Rules</a></li>
+		<li class="topnavli"><a href="#winners">Winners</a></li>
+	  </ul>
+	
+	
+	
+	<div class="content">
+		<div id="dollarSign">$
+			<div class="odometer" id="change">
+			</div>
+		</div>
+		
+		<form id="buy_tickets">
+			<a id="button" onclick="test()">buy <input onclick="changeValue()" id="numberinput" type="number" id="quantity" name="quantity" min="1" max="50" value="1"> tickets</a>
+		</form>
+	</div>
+	
+	<script src="assets/js/jackpot.js"></script>
+
+	<div id="timer"></div>
+</body>
