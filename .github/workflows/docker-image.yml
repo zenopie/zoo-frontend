@@ -20,5 +20,5 @@ jobs:
       name: docker login
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_TOKEN }}
+        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
             
