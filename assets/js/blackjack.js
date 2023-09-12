@@ -181,6 +181,37 @@ function resume_game(game_state) {
     } else if (game_state.action == "play") {
         hitButton.classList.remove("remove");
         standButton.classList.remove("remove");
+    } else if (game_state.action == "splitL") {
+        let split_ids = [];
+        for (let i = 0; i < game_state.split.length; i++) {
+            split_ids.push(game_state.split[i].id);
+        }
+        split_bet = bet + bet;
+        document.getElementById("bet").innerHTML = "Bet : " + "$ " + split_bet;
+        cash -= bet;
+        document.getElementById("cash").innerHTML = "Cash : " + "$ " + cash;
+        splitted = true;
+        left_Split = true;
+        hitButton.classList.remove("remove");
+        standButton.classList.remove("remove");
+        build_split(player_ids, split_ids);
+    } else if (game_state.action == "splitR") {
+        let split_ids = [];
+        for (let i = 0; i < game_state.split.length; i++) {
+            split_ids.push(game_state.split[i].id);
+        }
+        split_bet = bet + bet;
+        document.getElementById("bet").innerHTML = "Bet : " + "$ " + split_bet;
+        cash -= bet;
+        document.getElementById("cash").innerHTML = "Cash : " + "$ " + cash;
+        hitButton.classList.remove("remove");
+        standButton.classList.remove("remove");
+        splitted = true;
+        right_Split = true;
+        build_split(player_ids, split_ids);
+        split_1.classList.remove("card_split");
+        split_1.classList.add("card_split2");
+        split_2.classList.add("card_split");
     }
 }
 
@@ -339,7 +370,7 @@ document.getElementById("done").addEventListener("click", async() => {
 			(log) => log.type === "wasm" && log.key === "result"
 		).value;
         show_players_cards(player_cards_ids);
-        if (result != "blackjack") {
+        if (result != "blackjack" && result != "push") {
             show_first_dealer_card(Number(dealer_card));
         } else {
             showDealersCards(dealer_card.split(","));
@@ -775,13 +806,23 @@ function showInsuranceMessage(result) {
     document.getElementById("insurance_message").classList.add("cover2");
     document.getElementById("insurance_message").classList.remove("remove");
     if (result == "insurance win") {
+        result = "dealer blackjack";
         cash += bet;
         document.getElementById("cash").innerHTML = "silk : " + "$ " + cash;
     } else if (result == "insurance win/push") {
+        result = "dealer blackjack";
         cash += bet * 2;
         document.getElementById("cash").innerHTML = "silk : " + "$ " + cash;
     }
-    if (result == "insurance loss" || result == "no dealer blackjack") {
+    if (result == "dealer blackjack") {
+        document.getElementById("insurance_message").addEventListener("click", () => {
+            document.getElementById("insurance_message").classList.remove("cover2");
+            document.getElementById("insurance_message").classList.add("remove");
+            document.getElementById("chips-table").classList.remove("remove");
+            document.getElementById("headerimage").classList.remove("remove");
+            variable_Declaring();
+        }, { once: true });
+    } else if (result == "insurance loss" || result == "no dealer blackjack") {
         document.getElementById("insurance_message").addEventListener("click", async() => {
             document.getElementById("insurance_message").classList.remove("cover2");
             document.getElementById("insurance_message").classList.add("remove");
@@ -795,18 +836,23 @@ function showInsuranceMessage(result) {
             if (point_total == 10 || point_total == 11) {
                 doubleDownButton.classList.remove("remove");
             }
-        });
-    } else {
-        document.getElementById("insurance_message").addEventListener("click", async() => {
-            document.getElementById("insurance_message").classList.remove("cover2");
-            document.getElementById("insurance_message").classList.add("remove");
-            document.getElementById("chips-table").classList.remove("remove");
-            document.getElementById("headerimage").classList.remove("remove");
-            variable_Declaring();
-        });
+        }, { once: true });
+
     }
 }
 
+async function play_buttons() {
+    hitButton.classList.remove("remove");
+    standButton.classList.remove("remove");
+    surrenderButton.classList.remove("remove");
+    if (player_Cards[0].number == player_Cards[1].number) {
+        splitButton.classList.remove("remove");
+    }
+    let point_total = player_Cards[0].number + player_Cards[1].number;
+    if (point_total == 10 || point_total == 11) {
+        doubleDownButton.classList.remove("remove");
+    }
+};
 
 
 function buttonRemove() {

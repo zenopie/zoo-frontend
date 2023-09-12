@@ -1,0 +1,108 @@
+@import url("//fonts.googleapis.com/css?family=Rye");
+html, body{
+	background-color: #300;
+	font-family: arial;
+	cursor: default;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.sidenav {
+	display: block;
+	height: 100%;
+	width: 150px;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #000;
+	overflow-x: hidden;
+	padding-top: 0px;
+	
+}
+
+.sidenav ul {
+	padding: 0;
+}
+
+.logo {
+	padding-top: 30px;
+	display: block;
+	width: 100px;
+	margin: auto;
+	filter: invert(100%);
+}
+
+#raffle {
+	display: block;
+	width: 40%;
+	margin: auto;
+	margin-top: 40px;
+	filter: invert(100%);
+	transition: all .5s;
+}
+#raffle:hover {
+	transform: scale(1.2);
+}
+
+#roulette {
+	display: block;
+	width: 40%;
+	margin: auto;
+	margin-top: 40px;
+	filter: invert(100%);
+	transition: all .5s;
+}
+#roulette:hover {
+	rotate: 225deg;
+	transform: scale(1.2);
+}
+
+#blackjack {
+	display: block;
+	width: 40%;
+	margin: auto;
+	margin-top: 40px;
+	filter: invert(100%);
+	transition: all .5s;
+}
+#blackjack:hover {
+	transform: scale(1.2);
+}
+
+.topnav{
+	
+	width: 100%;
+	transform: translate(8px, -8px);
+	list-style-type: none;
+	padding-left: 130px;
+	box-sizing: border-box;
+	margin: 0;
+	overflow: hidden;
+	background-color: #000;
+}
+  
+.topnavli {
+	float: left;
+}
+  
+.topnavli a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 100px;
+	text-decoration: none;
+}
+  
+.topnavli a:hover:not(.active) {
+	background-color: #333;
+}
+  
+.active {
+	background-color: #300;
+	border-bottom: none;
+}

@@ -1,22 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<title>Raffle</title>
-	<meta name="title" content="Raffle">
+	<title>Roulette</title>
+	<meta name="title" content="Javascript Roulette">
 	<meta name="description" content="A fully functioning roulette game made using Javascript and CSS">
 	<meta name="author" content="ozboware">
 	<meta property="og:url" content="/">
 	<meta property="og:title" content="Javascript Roulette">
 	<meta property="og:description" content="A fully functioning roulette game made using Javascript and CSS">
+	<link href="./assets/css/style.css" rel="stylesheet" type="text/css">
 	<link href="./assets/css/global.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="/assets/css/odometer-theme-slot-machine.css" />
 </head>
 
 <body>
 	<script src="https://www.unpkg.com/secretjs/dist/browser.js" ></script>
-	<script src="assets/js/odometer.js"></script>
 	<script src="assets/js/global.js"></script>
-	
 	
 
 	<div class="sidenav">
@@ -44,25 +42,22 @@
 		</ul>
 	</div>
 	<ul class="topnav">
-		<li class="topnavli"><a class="active" href="#jackpot">Jackpot</a></li>
-		<li class="topnavli"><a href="#rules">Rules</a></li>
-		<li class="topnavli"><a href="#winners">Winners</a></li>
-	  </ul>
-	
-	
-	
-	<div class="content">
-		<div id="dollarSign">$
-			<div class="odometer" id="change">
-			</div>
-		</div>
-		
-		<form id="buy_tickets">
-			<a id="button" onclick="test()">buy <input onclick="changeValue()" id="numberinput" type="number" id="quantity" name="quantity" min="1" max="50" value="1"> tickets</a>
-		</form>
+		<li class="topnavli"><a id="table-nav" class="active" href="#table">Table</a></li>
+		<li class="topnavli"><a id="rules-nav" href="#rules">Rules</a></li>
+	</ul>
+	<div id="show-rules" class="remove">
+		<h1>BET TYPES AND PAYOUTS</h1>
+		<h3>House Edge 2.70%</h3>
+        <p>Single number bet pays 35 to 1. Also called “straight up.”</p>
+        <p>Double number bet pays 17 to 1. Also called a “split.”</p>
+		<p>Three number bet pays 11 to 1. Also called a “street.”</p>
+		<p>Four number bet pays 8 to 1. Also called a “corner bet.”</p>
+		<p>Six number bets pays 5 to 1. Example: 7, 8, 9, 10, 11, 12. Also called a “line.”</p>
+		<p>Twelve numbers or dozens (first, second, third dozen) pays 2 to 1.</p>
+        <p>Column bet (12 numbers in a row) pays 2 to 1. </p>
+		<p>18 numbers (1-18),(19-36) pays even money. </p>
+		<p>Red or black pays even money.</p>
+        <p>Odd or even bets pay even money.</p>
 	</div>
-	
-	<script src="assets/js/jackpot.js"></script>
-
-	<div id="timer"></div>
+	<script src="./assets/js/roulette.js"></script>
 </body>

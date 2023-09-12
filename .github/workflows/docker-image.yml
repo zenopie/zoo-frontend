@@ -22,4 +22,4 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         push: true
-        tags: zenopie/zoo:latest
+        tags: zenopie/zoo-frontend:latest
