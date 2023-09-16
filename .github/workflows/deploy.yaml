@@ -14,16 +14,11 @@ jobs:
         uses: actions/checkout@v2
 
       - name: SSH into Server
-      uses: webfactory/ssh-agent@v0.4.1
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        ssh-host: 51.81.154.8
-        ssh-username: ubuntu
-
-      - name: Copy Files to Server
-        run: |
-          ssh ubuntu@51.81.154.8 "mkdir -p /var/www/html"
-          scp -r ./* ubuntu@51.81.154.8:/var/www/html
+        uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-host: 51.81.154.8
+          ssh-username: ubuntu
 
       - name: Update Nginx Configuration (if needed)
         run: |
