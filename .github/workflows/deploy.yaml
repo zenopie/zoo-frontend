@@ -22,13 +22,5 @@ jobs:
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
-    - name: Start SSH Agent
-      run: eval "$(ssh-agent -s)"
-
-    - name: Add SSH Private Key to Agent
-      run: |
-        ssh-add ~/.ssh/id_rsa
-        ssh-add -l  # Verify that the key has been added
-
     - name: Deploy to Server
       run: scp -r * ubuntu@51.81.154.8:/var/www/html
