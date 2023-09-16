@@ -9,7 +9,7 @@
 	<meta property="og:title" content="Javascript Roulette">
 	<meta property="og:description" content="A fully functioning roulette game made using Javascript and CSS">
 	<link href="./assets/css/global.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="/assets/css/odometer-theme-slot-machine.css" />
+	<link rel="stylesheet" href="/assets/css/raffle.css" />
 </head>
 
 <body>
@@ -44,14 +44,13 @@
 		</ul>
 	</div>
 	<ul class="topnav">
-		<li class="topnavli"><a class="active" href="#jackpot">Jackpot</a></li>
-		<li class="topnavli"><a href="#rules">Rules</a></li>
-		<li class="topnavli"><a href="#winners">Winners</a></li>
-	  </ul>
+		<li class="topnavli"><a id="raffle-nav" class="active" href="#raffle">Raffle</a></li>
+		<li class="topnavli"><a id="rules-nav" href="#rules">Rules</a></li>
+		<li class="topnavli"><a id="ticket-nav" href="#tickets">My Tickets</a></li>
+	</ul>
 	
 	
-	
-	<div class="content">
+	<div id="raffle-box">
 		<div id="dollarSign">$
 			<div class="odometer" id="change">
 			</div>
@@ -60,9 +59,20 @@
 		<form id="buy_tickets">
 			<a id="button" onclick="test()">buy <input onclick="changeValue()" id="numberinput" type="number" id="quantity" name="quantity" min="1" max="50" value="1"> tickets</a>
 		</form>
+		<div id="timer"></div>
 	</div>
 	
-	<script src="assets/js/jackpot.js"></script>
+	
 
-	<div id="timer"></div>
+	<div id="rules-box" class="show-rules remove">
+		<h1>RULES</h1>
+        <p>Once a week there is a drawing to find the winner of the raffle jackpot.</p>
+        <p>The jackpot is filled with 2% of all bets</p>
+		<p>Each ticket costs 1 silk.</p>
+	</div>
+	<div id="tickets-box" class="show-rules remove">
+		<h1>MY TICKETS</h1>
+	</div>
+
+	<script src="assets/js/raffle.js"></script>
 </body>

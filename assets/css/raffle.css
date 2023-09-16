@@ -1,7 +1,40 @@
 @import url("//fonts.googleapis.com/css?family=Rye");
 
+
+.ticket {
+  margin: 5px;
+  display: inline-block;
+  box-sizing: content-box;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5));
+  position: relative;
+  height: 1em;
+  padding: 20px;
+  color: black;
+  font-size: 16px;
+  background-size: 51% 100%;
+  background-repeat: no-repeat;
+  background-image: radial-gradient(circle at 0 50%, rgba(255, 255, 224, 0) 0.4em, darkred 0.5em), radial-gradient(circle at 100% 50%, rgba(255, 255, 224, 0) 0.4em, darkred 0.5em);
+  background-position: top left, top right;
+}
+.show-rules {
+  padding: 10px;
+  flex-direction: column;
+  position: absolute;
+  background-color: green;
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+  font-size: large;
+  border-style: solid;
+  margin-top: 75px;
+  z-index: 99;
+  color: white;
+  text-align: center;
+
+}
+
 #timer {
-  margin-left: 150px;
+  margin-left: 50px;
   margin-top: 150px;
   font-size: 3em;
   font-weight: 100;
@@ -29,7 +62,7 @@
   font-weight: 400;
 }
 
-.content {
+#raffle-box {
   margin-left: 150px;
   position: relative;
 }
@@ -216,4 +249,7 @@
   left: 0;
   right: 0;
   text-align: center;
+}
+.remove {
+  display: none;
 }
