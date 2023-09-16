@@ -21,4 +21,4 @@ jobs:
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H 51.81.154.8 >> ~/.ssh/known_hosts
-        scp -r * ubuntu@51.81.154.8:/var/www/html
+        sudo scp -r * ubuntu@51.81.154.8:/var/www/html
