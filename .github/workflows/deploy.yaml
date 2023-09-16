@@ -1,29 +1,24 @@
-name: Deploy to Nginx
+name: Deploy to Dedicated Server
 
 on:
   push:
     branches:
-      - main # Change this to your main branch name
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v2
 
-      - name: SSH into Server
-        uses: webfactory/ssh-agent@v0.4.1
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          ssh-host: 51.81.154.8
-          ssh-username: ubuntu
-
-      - name: Update Nginx Configuration (if needed)
-        run: |
-          # Add commands to update Nginx configuration, if necessary
-
-      - name: Reload Nginx
-        run: |
-          sudo systemctl reload nginx
+    - name: Deploy to Server
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H your-server-ip >> ~/.ssh/known_hosts
+        scp -r * ubuntu@51.81.154.8:/var/www/html
