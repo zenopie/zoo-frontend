@@ -41,7 +41,6 @@ function test() {
     setTimeout(() => {
         document.getElementById("numberinput").value = 1;
     }, 2000);
-    console.log(quantity);
     enterRaffle(quantity);
     event.preventDefault();
 }
@@ -75,12 +74,16 @@ async function enterRaffle(quantity){
 			}
 		}
 	});
-	let resp = await secretjs.tx.broadcast([msg], {
+	let tx = await secretjs.tx.broadcast([msg], {
 		gasLimit: 1_000_000,
 		gasPriceInFeeDenom: 0.1,
 		feeDenom: "uscrt",
 	});
-	console.log(resp);
+	console.log(tx);
+    let tickets = tx.arrayLog.find(
+        (log) => log.type === "wasm" && log.key === "tickets"
+    ).value.split(",");
+    notification(tickets);
 };
 
 
@@ -89,7 +92,6 @@ async function start(){
     setInterval(getState,100000);
     next_drawing = state.drawing_end / 1000000;
     let ticket_log = await query();
-    console.log(ticket_log);
     for (let i = 0; i < ticket_log.length; i++) {
         let tickets_box = document.getElementById("tickets-box");
         let bank = document.createElement('div');
@@ -97,6 +99,29 @@ async function start(){
         bank.innerText = 'TICKET #' + ticket_log[i];
         tickets_box.append(bank);
     }
+}
+function notification(tickets) {
+    let notification = document.createElement('div');
+    notification.setAttribute('id', 'notification');
+    let nsnumber = document.createElement('span');
+    nsnumber.setAttribute('class', 'nsnumber');
+    nsnumber.innerText = "Succsessfully purchased " + tickets.length + " tickets";
+    notification.append(nsnumber);
+    let raffle_box = document.getElementById("raffle-box");
+    raffle_box.prepend(notification);
+    for (let i = 0; i < tickets.length; i++) {
+        let tickets_box = document.getElementById("tickets-box");
+        let ticket = document.createElement('div');
+        ticket.setAttribute('class', 'ticket');
+        ticket.innerText = 'TICKET #' + tickets[i];
+        tickets_box.append(ticket);
+    }
+    setTimeout(function(){
+        notification.style.cssText = 'opacity:0';
+    }, 3000);
+    setTimeout(function(){
+        notification.remove();
+    }, 4000);
 }
 async function query(){
 	let query = await secretjs.query.compute.queryContract({
@@ -141,6 +166,7 @@ async function getState(){
 	  }
 	});
     let jackpot = stateinfo.state.jackpot / 1000000;
+    console.log("jackpot");
     console.log(jackpot);
     document.getElementById("change").innerHTML = Math.floor(jackpot);
     if (stateinfo.state.drawing_end < Date.now() * 1000000) {

@@ -1,6 +1,26 @@
 @import url("//fonts.googleapis.com/css?family=Rye");
 
+#notification{
+  display: flex;
+  justify-content: center; /* Horizontal alignment, e.g., centering content horizontally */
+  align-items: center;
+  margin-left: 75px;
+	position: absolute;
+	width: 550px;
+	height: 250px;
+	background-color: #ad0205;
+	z-index: 10;
+	border: 8px solid #d3b201;
+	border-radius: 12px;
+	transition: 1s;
 
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 50px;
+  font-weight: bolder;
+  text-align: center;
+  color: #fff;
+}
 .ticket {
   margin: 5px;
   display: inline-block;
@@ -9,27 +29,49 @@
   position: relative;
   height: 1em;
   padding: 20px;
-  color: black;
+  color: goldenrod;
   font-size: 16px;
   background-size: 51% 100%;
   background-repeat: no-repeat;
   background-image: radial-gradient(circle at 0 50%, rgba(255, 255, 224, 0) 0.4em, darkred 0.5em), radial-gradient(circle at 100% 50%, rgba(255, 255, 224, 0) 0.4em, darkred 0.5em);
   background-position: top left, top right;
+  /* Add a text shadow for the glowing effect */
+  text-shadow: 0 0 10px rgba(255, 255, 224, 0.5);
 }
+
+
+
+
+
+
 .show-rules {
   padding: 10px;
   flex-direction: column;
   position: absolute;
-  background-color: green;
+  background-color: #016D29;
   width: 60%;
   margin-left: 20%;
   margin-right: 20%;
-  font-size: large;
-  border-style: solid;
   margin-top: 75px;
   z-index: 99;
   color: white;
   text-align: center;
+
+  border-radius: 12px;
+  border: 3px outset;
+  border-color: #e2c16e;
+  display: inline-block;
+  padding: 15px 30px;
+  color: #eee;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  overflow: hidden;
+  font-family: arial;
+  font-size: 20px;
+  font-weight: bolder;
+  text-decoration: none;
+  background-color: #016D29;
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
 
 }
 
