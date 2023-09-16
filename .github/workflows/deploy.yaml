@@ -1,4 +1,4 @@
-name: Deploy to Dedicated Server
+name: Deploy to Server
 
 on:
   push:
@@ -13,12 +13,20 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Deploy to Server
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Setup SSH
       run: |
         mkdir -p ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H 51.81.154.8 >> ~/.ssh/known_hosts
-        sudo scp -r * ubuntu@51.81.154.8:/var/www/html
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Start SSH Agent
+      run: eval "$(ssh-agent -s)"
+
+    - name: Add SSH Private Key to Agent
+      run: ssh-add ~/.ssh/id_rsa
+
+    - name: Deploy to Server
+      run: scp -r * ubuntu@51.81.154.8:/var/www/html
