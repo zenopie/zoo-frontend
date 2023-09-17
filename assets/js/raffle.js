@@ -2,27 +2,42 @@ document.getElementById("rules-nav").addEventListener("click", async() => {
     document.getElementById("raffle-nav").classList.remove("active");
     document.getElementById("rules-nav").classList.add("active");
     document.getElementById("ticket-nav").classList.remove("active");
+    document.getElementById("history-nav").classList.remove("active");
     document.getElementById("raffle-box").classList.add("remove");
     document.getElementById("rules-box").classList.remove("remove");
     document.getElementById("tickets-box").classList.add("remove");
+    document.getElementById("history-box").classList.add("remove");
 });
 
 document.getElementById("raffle-nav").addEventListener("click", async() => {
     document.getElementById("raffle-nav").classList.add("active");
     document.getElementById("rules-nav").classList.remove("active");
     document.getElementById("ticket-nav").classList.remove("active");
+    document.getElementById("history-nav").classList.remove("active");
     document.getElementById("raffle-box").classList.remove("remove");
     document.getElementById("rules-box").classList.add("remove");
     document.getElementById("tickets-box").classList.add("remove");
+    document.getElementById("history-box").classList.add("remove");
 });
 document.getElementById("ticket-nav").addEventListener("click", async() => {
     document.getElementById("ticket-nav").classList.add("active");
     document.getElementById("raffle-nav").classList.remove("active");
     document.getElementById("rules-nav").classList.remove("active");
+    document.getElementById("history-nav").classList.remove("active");
     document.getElementById("tickets-box").classList.remove("remove");
     document.getElementById("rules-box").classList.add("remove");
     document.getElementById("raffle-box").classList.add("remove");
-
+    document.getElementById("history-box").classList.add("remove");
+});
+document.getElementById("history-nav").addEventListener("click", async() => {
+    document.getElementById("history-nav").classList.add("active");
+    document.getElementById("ticket-nav").classList.remove("active");
+    document.getElementById("raffle-nav").classList.remove("active");
+    document.getElementById("rules-nav").classList.remove("active");
+    document.getElementById("tickets-box").classList.add("remove");
+    document.getElementById("rules-box").classList.add("remove");
+    document.getElementById("raffle-box").classList.add("remove");
+    document.getElementById("history-box").classList.remove("remove");
 });
 
 
@@ -91,7 +106,7 @@ async function start(){
     let state = await getState();
     setInterval(getState,100000);
     next_drawing = state.drawing_end / 1000000;
-    let ticket_log = await query();
+    let ticket_log = await query_ticket_log();
     for (let i = 0; i < ticket_log.length; i++) {
         let tickets_box = document.getElementById("tickets-box");
         let bank = document.createElement('div');
@@ -109,8 +124,8 @@ function notification(tickets) {
     notification.append(nsnumber);
     let raffle_box = document.getElementById("raffle-box");
     raffle_box.prepend(notification);
+    let tickets_box = document.getElementById("tickets-box");
     for (let i = 0; i < tickets.length; i++) {
-        let tickets_box = document.getElementById("tickets-box");
         let ticket = document.createElement('div');
         ticket.setAttribute('class', 'ticket');
         ticket.innerText = 'TICKET #' + tickets[i];
@@ -123,7 +138,7 @@ function notification(tickets) {
         notification.remove();
     }, 4000);
 }
-async function query(){
+async function query_ticket_log(){
 	let query = await secretjs.query.compute.queryContract({
 	  contract_address: lottery_contract,
 	  code_hash: lottery_hash,
@@ -137,6 +152,41 @@ async function query(){
     console.log(query);
 	return(query.tickets);
 };
+document.getElementById("query-button").addEventListener("click", async() => {
+    let query = await query_last_drawing();
+    document.getElementById("betAlert").classList.add("remove");
+    let history_box = document.getElementById("history-box");
+    let winner = document.createElement("h2");
+    winner.innerText = "last winner - " + query.winner;
+    history_box.append(winner);
+    let ticket_label = document.createElement("h2");
+    ticket_label.innerText = "my tickets";
+    history_box.append(ticket_label);
+    for (let i = 0; i < query.tickets.length; i++) {
+        let bank = document.createElement('div');
+        bank.setAttribute('class', 'ticket');
+        bank.innerText = 'TICKET #' + query.tickets[i];
+        history_box.append(bank);
+    }
+
+
+
+});
+async function query_last_drawing(){
+	let query = await secretjs.query.compute.queryContract({
+	  contract_address: lottery_contract,
+	  code_hash: lottery_hash,
+	  query: {
+		  last_raffle: {
+			address: window.secretjs.address
+		},
+	  }
+	});
+    console.log("ticket log");
+    console.log(query);
+	return(query);
+};
+
 
 let next_drawing;
 
