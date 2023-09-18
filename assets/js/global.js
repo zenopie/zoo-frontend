@@ -1,8 +1,8 @@
 const { SecretNetworkClient, MsgExecuteContract } = window.secretjs;
 
 
-const lottery_contract =  "secret174drcxhhh73ny9ka5qxqye6xzn0s9tr5lyqxl2";
-const lottery_hash =  "1fa8cb25090ed56df028399913b134a029ef4013a845f04cc7112b1110da7e2e";
+const lottery_contract =  "secret1ckg28tl87vrmn5m522lmuqdd3m39wcxjugrgsg";
+const lottery_hash =  "381c911c7602f99f7b1ad774e9e01887e14697b2476a3e3817b159df9b6de23e";
 const sscrt_contract = 'secret1gvn6eap7xgsf9kydgmvpqwzkru2zj35ar2vncj';
 const sscrt_hash = 'c74bc4b0406507257ed033caa922272023ab013b0c74330efc16569528fa34fe';
 

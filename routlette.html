@@ -44,8 +44,9 @@
 	<ul class="topnav">
 		<li class="topnavli"><a id="table-nav" class="active" href="#table">Table</a></li>
 		<li class="topnavli"><a id="rules-nav" href="#rules">Rules</a></li>
+		<li class="topnavli"><a id="history-nav" href="#rules">Last Spin</a></li>
 	</ul>
-	<div id="show-rules" class="remove">
+	<div id="show-rules" class="show-rules remove">
 		<h1>BET TYPES AND PAYOUTS</h1>
 		<h3>House Edge 2.70%</h3>
         <p>Single number bet pays 35 to 1. Also called “straight up.”</p>
@@ -58,6 +59,15 @@
 		<p>18 numbers (1-18),(19-36) pays even money. </p>
 		<p>Red or black pays even money.</p>
         <p>Odd or even bets pay even money.</p>
+	</div>
+	<div id="history-box" class="show-rules remove">
+		<h1>LAST SPIN</h1>
+		<div id="betAlert" class="cover">
+			<p>Get History</p>
+			<div>
+				<button id="query-button">Query</button>
+			</div>
+		</div>
 	</div>
 	<script src="./assets/js/roulette.js"></script>
 </body>

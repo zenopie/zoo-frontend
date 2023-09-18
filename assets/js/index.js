@@ -126,4 +126,5 @@ async function wrap(){
 	});
     console.log("transaction log");
 	console.log(tx);
+    snip_balance += number;
 };

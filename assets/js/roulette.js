@@ -1,15 +1,63 @@
 document.getElementById("rules-nav").addEventListener("click", async() => {
     document.getElementById("table-nav").classList.remove("active");
     document.getElementById("rules-nav").classList.add("active");
+	document.getElementById("history-nav").classList.remove("active");
     document.getElementById("table").classList.add("remove");
     document.getElementById("show-rules").classList.remove("remove");
+	document.getElementById("history-box").classList.add("remove");
 });
 
 document.getElementById("table-nav").addEventListener("click", async() => {
     document.getElementById("table-nav").classList.add("active");
     document.getElementById("rules-nav").classList.remove("active");
+	document.getElementById("history-nav").classList.remove("active");
     document.getElementById("table").classList.remove("remove");
     document.getElementById("show-rules").classList.add("remove");
+	document.getElementById("history-box").classList.add("remove");
+});
+document.getElementById("history-nav").addEventListener("click", async() => {
+    document.getElementById("table-nav").classList.remove("active");
+    document.getElementById("rules-nav").classList.remove("active");
+	document.getElementById("history-nav").classList.add("active");
+    document.getElementById("table").classList.add("remove");
+    document.getElementById("show-rules").classList.add("remove");
+	document.getElementById("history-box").classList.remove("remove");
+});
+
+async function query_last_roulette(){
+	let query = await secretjs.query.compute.queryContract({
+	  contract_address: lottery_contract,
+	  code_hash: lottery_hash,
+	  query: {
+		  last_roulette: {
+			address: window.secretjs.address
+		},
+	  }
+	});
+    console.log(query.last_spin);
+	return(query.last_spin);
+};
+document.getElementById("query-button").addEventListener("click", async() => {
+    let query = await query_last_roulette();
+    document.getElementById("betAlert").classList.add("remove");
+	document.getElementById("betAlert").classList.remove("cover");
+    let history_box = document.getElementById("history-box");
+    let winner = document.createElement("h2");
+    winner.innerText = "winning number - " + query.winning_number;
+    history_box.append(winner);
+    let ticket_label = document.createElement("h2");
+    ticket_label.innerText = "my bets";
+    history_box.append(ticket_label);
+    for (let i = 0; i < query.bets.length; i++) {
+        let bank = document.createElement('div');
+        bank.innerText = "bet type: " + query.bets[i].bet_type + " numbers: " + query.bets[i].numbers + " wager: " + query.bets[i].wager;
+        history_box.append(bank);
+    }
+	let winnings = document.createElement("h2");
+	winnings.innerText = "winnings - " + query.winnings;
+	history_box.append(winnings);
+
+
 });
 
 
