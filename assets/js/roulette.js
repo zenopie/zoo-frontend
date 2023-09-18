@@ -54,7 +54,7 @@ document.getElementById("query-button").addEventListener("click", async() => {
         history_box.append(bank);
     }
 	let winnings = document.createElement("h2");
-	winnings.innerText = "winnings - " + query.winnings;
+	winnings.innerText = "winnings - " + (query.winnings / 1000000);
 	history_box.append(winnings);
 
 
