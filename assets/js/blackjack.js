@@ -357,8 +357,6 @@ standButton.addEventListener("click", async() => {
             win();
         } else if (result == "lose") {
             loss();
-        } else if (result == "dealer_bust") {
-            win();
         } else {
             draw();
         }
@@ -427,7 +425,7 @@ hitButton.addEventListener("click", async() => {
             first_move = false;
         }
 
-        if (result == "bust") {
+        if (result == "lose") {
             loss();
         }
     }
@@ -529,8 +527,6 @@ doubleDownButton.addEventListener("click", async() => {
         win();
     } else if (result == "lose") {
         loss();
-    } else if (result == "dealer_bust") {
-        win();
     } else {
         draw();
     }
