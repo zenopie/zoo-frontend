@@ -1,17 +1,103 @@
 document.getElementById("rules-nav").addEventListener("click", async() => {
     document.getElementById("table-nav").classList.remove("active");
     document.getElementById("rules-nav").classList.add("active");
+	document.getElementById("history-nav").classList.remove("active");
     document.getElementById("blackjack-table").classList.add("remove");
     document.getElementById("show-rules").classList.remove("remove");
+	document.getElementById("history-box").classList.add("remove");
 });
 
 document.getElementById("table-nav").addEventListener("click", async() => {
     document.getElementById("table-nav").classList.add("active");
     document.getElementById("rules-nav").classList.remove("active");
+	document.getElementById("history-nav").classList.remove("active");
     document.getElementById("blackjack-table").classList.remove("remove");
     document.getElementById("show-rules").classList.add("remove");
+	document.getElementById("history-box").classList.add("remove");
+});
+document.getElementById("history-nav").addEventListener("click", async() => {
+    document.getElementById("table-nav").classList.remove("active");
+    document.getElementById("rules-nav").classList.remove("active");
+	document.getElementById("history-nav").classList.add("active");
+    document.getElementById("blackjack-table").classList.add("remove");
+    document.getElementById("show-rules").classList.add("remove");
+	document.getElementById("history-box").classList.remove("remove");
 });
 
+document.getElementById("query-button").addEventListener("click", async() => {
+    let query = await getState();
+    document.getElementById("button-div").classList.add("remove");
+	document.getElementById("button-div").classList.remove("cover");
+    let history_box = document.getElementById("history-box");
+    if (query.action != "ready") {
+        let notif = document.createElement("h3");
+        notif.innerText = "game in progress";
+        history_box.append(notif);
+    } else {
+        let result = document.createElement("h3");
+        result.innerText = "result - " + query.result;
+        history_box.append(result);
+        let winnings = document.createElement("h3");
+        winnings.innerText = "winnings - " + (query.winnings / 1000000);
+        history_box.append(winnings);
+        let bet = document.createElement("h3");
+        bet.innerText = "bet - " + (query.wager / 1000000);
+        history_box.append(bet);
+        let dealer_ids = [];
+        for (let i = 0; i < query.dealer.length; i++) {
+            dealer_ids.push(query.dealer[i].id);
+        }
+        let notif = document.createElement("h3");
+        notif.innerText = "dealer cards";
+        history_box.append(notif);
+        let dealer_card_box = document.createElement("div");
+        dealer_card_box.style.display = "flex";
+        history_box.append(dealer_card_box);
+        for (let i = 0; i < dealer_ids.length; i++) {
+            random_Card_Dealer = deck[Number(dealer_ids[i])];
+            dealer_Card_HTML = document.createElement("div");
+            dealer_card_box.append(dealer_Card_HTML);
+            dealer_Card_HTML.classList.add("card2");
+            dealer_Card_HTML.style.backgroundImage = random_Card_Dealer.image;
+        }
+        let player_ids = [];
+        for (let i = 0; i < query.player.length; i++) {
+            player_ids.push(query.player[i].id);
+        }
+        let player_label = document.createElement("h3");
+        player_label.innerText = "player cards";
+        history_box.append(player_label);
+        let player_card_box = document.createElement("div");
+        player_card_box.style.display = "flex";
+        history_box.append(player_card_box);
+        for (let i = 0; i < player_ids.length; i++) {
+            random_Card_Player = deck[Number(player_ids[i])];
+            player_Card_HTML = document.createElement("div");
+            player_card_box.append(player_Card_HTML);
+            player_Card_HTML.classList.add("card2");
+            player_Card_HTML.style.backgroundImage = random_Card_Player.image;
+        }
+        if (query.split.length > 0) {
+            let split_ids = [];
+            for (let i = 0; i < query.split.length; i++) {
+                split_ids.push(query.split[i].id);
+            }
+            let split_label = document.createElement("h3");
+            split_label.innerText = "split cards";
+            history_box.append(split_label);
+            let split_card_box = document.createElement("div");
+            split_card_box.style.display = "flex";
+            history_box.append(split_card_box);
+            for (let i = 0; i < split_ids.length; i++) {
+                random_Card_Split = deck[Number(split_ids[i])];
+                split_Card_HTML = document.createElement("div");
+                split_card_box.append(split_Card_HTML);
+                split_Card_HTML.classList.add("card2");
+                split_Card_HTML.style.backgroundImage = random_Card_Split.image;
+            }
+        }
+    }
+});
 
 async function start() {
     viewing_key = await window.keplr.getSecret20ViewingKey(chainId, sscrt_contract);
@@ -805,7 +891,9 @@ function show_first_dealer_card(dealer_card){
 function remove_bet_and_chips(){
     document.getElementById("headerimage").classList.add("remove");
     document.getElementById("chips-table").classList.add("remove");
+    document.getElementById("betAlert").classList.remove("cover");
     document.getElementById("betAlert").classList.add("remove");
+	
     bet_Chips = document.getElementById("chips-table").querySelectorAll("div");
     for (let i = 0; i < bet_Chips.length; i++) {
         bet_Chips[i].style.pointerEvents = "none";

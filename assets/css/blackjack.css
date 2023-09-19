@@ -88,7 +88,14 @@ h2 {
 #player_cards {
     margin-top: 5px;
 }
-
+.card2 {
+    width: 100px;
+    height: 150px;
+    background-size: contain; 
+    background-repeat: no-repeat;
+    margin: auto;
+       
+}
 .card {
     width: 100px;
     height: 150px;
@@ -233,7 +240,7 @@ button:hover {
     pointer-events: auto;
 }
 
-#show-rules {
+.show-rules {
 	padding: 10px;
 	flex-direction: column;
 	position: absolute;

@@ -37,8 +37,9 @@
 	<ul class="topnav">
 		<li class="topnavli"><a id="table-nav" class="active" href="#table">Table</a></li>
 		<li class="topnavli"><a id="rules-nav" href="#rules">Rules</a></li>
+		<li class="topnavli"><a id="history-nav" href="#history">Last Hand</a></li>
 	</ul>
-    <div id="show-rules" class="remove">
+    <div id="show-rules" class="show-rules remove">
 		<h1>RULES</h1>
 		<h3>House Edge 0.131%</h3>
         <p>The goal of blackjack is to beat the dealer's hand without going over 21.</p>
@@ -61,7 +62,15 @@
         <p>You can only double/split/surrender on the first move</p>
 	</div>
 
-    
+    <div id="history-box" class="show-rules remove">
+		<h1>LAST HAND</h1>
+		<div id="button-div" class="cover">
+			<p>Get History</p>
+			<div>
+				<button id="query-button">Query</button>
+			</div>
+		</div>
+	</div>
     
 
     <div id="blackjack-table">
