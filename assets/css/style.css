@@ -46,6 +46,29 @@
 	transition: 1s;
 }
 
+.notification{
+    display: flex;
+    justify-content: center; /* Horizontal alignment, e.g., centering content horizontally */
+    align-items: center;
+      position: absolute;
+      left: 385px;
+      top: 200px;
+      width: 550px;
+      height: 250px;
+      background-color: #ad0205;
+      z-index: 10;
+      border: 8px solid #d3b201;
+      border-radius: 12px;
+      transition: 1s;
+  
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 50px;
+    font-weight: bolder;
+    text-align: center;
+    color: #fff;
+  }
+
 .nSpan{
 	display: block;
 	position: relative;

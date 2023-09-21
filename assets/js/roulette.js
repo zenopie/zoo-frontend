@@ -37,6 +37,22 @@ async function query_last_roulette(){
     console.log(query.last_spin);
 	return(query.last_spin);
 };
+
+function notification() {
+    let notification = document.createElement('div');
+    notification.setAttribute('class', 'notification');
+    let nsnumber = document.createElement('span');
+    nsnumber.innerText = "Click here for silk viewing key";
+    notification.append(nsnumber);
+    let raffle_box = document.getElementById("table");
+    raffle_box.prepend(notification);
+    notification.addEventListener("click", async() => {
+        await window.keplr.suggestToken(chainId, sscrt_contract);
+        notification.remove();
+        start();
+    });
+}
+
 document.getElementById("query-button").addEventListener("click", async() => {
     let query = await query_last_roulette();
     document.getElementById("betAlert").classList.add("remove");
@@ -92,7 +108,12 @@ let ballTrack = document.getElementsByClassName('ballTrack')[0];
 
 
 async function start(){
-	viewing_key = await window.keplr.getSecret20ViewingKey(chainId, sscrt_contract);
+	try {
+		viewing_key = await window.keplr.getSecret20ViewingKey(chainId, sscrt_contract);
+	} catch (error) {
+		notification();
+		return;
+	}
 	bankValue = await querySscrt();
 	resetGame();
 }

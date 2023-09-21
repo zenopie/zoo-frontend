@@ -100,7 +100,12 @@ document.getElementById("query-button").addEventListener("click", async() => {
 });
 
 async function start() {
-    viewing_key = await window.keplr.getSecret20ViewingKey(chainId, sscrt_contract);
+    try {
+        viewing_key = await window.keplr.getSecret20ViewingKey(chainId, sscrt_contract);
+    } catch (error) {
+        notification();
+        return;
+    }
     cash = await querySscrt()
     cash = cash / 100;
     betAndCash(0);
@@ -126,6 +131,21 @@ async function querySscrt(){
 	return(snip_balance);
 };
 
+function notification() {
+    let notification = document.createElement('div');
+    notification.setAttribute('id', 'notification');
+    let nsnumber = document.createElement('span');
+    nsnumber.setAttribute('class', 'nsnumber');
+    nsnumber.innerText = "Click here for silk viewing key";
+    notification.append(nsnumber);
+    let raffle_box = document.getElementById("blackjack-table");
+    raffle_box.prepend(notification);
+    notification.addEventListener("click", async() => {
+        await window.keplr.suggestToken(chainId, sscrt_contract);
+        notification.remove();
+        start();
+    });
+}
 async function getState(){
 	let stateinfo = await secretjs.query.compute.queryContract({
 	  contract_address: lottery_contract,
