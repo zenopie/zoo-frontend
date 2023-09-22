@@ -130,7 +130,15 @@ async function querySscrt(){
 	snip_balance = Math.floor(sscrt_info.balance.amount / 10000);
 	return(snip_balance);
 };
-
+document.getElementById("blackjack-table").oncontextmenu = function(e){
+    if (in_play == false) {
+        e.preventDefault();
+        cash += bet;
+        bet -= bet;
+        document.getElementById("bet").innerHTML = "Bet : " + "$ " + bet;
+        document.getElementById("cash").innerHTML = "silk : " + "$ " + cash;
+    }
+}
 function notification() {
     let notification = document.createElement('div');
     notification.setAttribute('id', 'notification');
@@ -162,6 +170,7 @@ async function getState(){
 };
 
 function resume_game(game_state) {
+    in_play = true;
     bet = game_state.wager / 1000000;
     document.getElementById("bet").innerHTML = "Bet : " + "$ " + bet;
     remove_bet_and_chips();
@@ -299,6 +308,7 @@ for (let i = 0; i < buttons.length; i++) {
 let player_Cards;
 
 function variable_Declaring() {
+    in_play = false;
     showingRules = false;
     bet = 0;
     lastBets = [];
@@ -366,6 +376,7 @@ for (let i = 0; i < betArray.length; i++) {
 
 document.getElementById("done").addEventListener("click", async() => {
     if (bet > 0) {
+        in_play = true;
         let tx = await recieve_contract(bet, "deal");
         let player_cards_ids = tx.arrayLog.find(
 			(log) => log.type === "wasm" && log.key === "player_cards"
