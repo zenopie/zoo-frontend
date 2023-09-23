@@ -11,6 +11,13 @@ let snip_balance;
 
 
 window.onload = async () => {
+    connectKeplr();
+};
+window.addEventListener("keplr_keystorechange", () => {
+    console.log("changed accounts")
+    connectKeplr();
+})
+async function connectKeplr() {
     this.chainId = 'pulsar-3';
 
     // Keplr extension injects the offline signer that is compatible with cosmJS.
@@ -110,4 +117,4 @@ window.onload = async () => {
     } else {
         console.log("error connecting to keplr");
     }
-};
+}

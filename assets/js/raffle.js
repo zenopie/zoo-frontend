@@ -114,6 +114,28 @@ async function start(){
         bank.innerText = 'TICKET #' + ticket_log[i];
         tickets_box.append(bank);
     }
+    try {
+        document.getElementById("notification").remove();
+        viewing_key = await window.keplr.getSecret20ViewingKey(chainId, sscrt_contract);
+    } catch (error) {
+        vkNotification();
+        return;
+    }
+}
+function vkNotification() {
+    let notification = document.createElement('div');
+    notification.setAttribute('id', 'notification');
+    let nsnumber = document.createElement('span');
+    nsnumber.setAttribute('class', 'nsnumber');
+    nsnumber.innerText = "Click here for silk viewing key";
+    notification.append(nsnumber);
+    let raffle_box = document.getElementById("raffle-box");
+    raffle_box.prepend(notification);
+    notification.addEventListener("click", async() => {
+        await window.keplr.suggestToken(chainId, sscrt_contract);
+        notification.remove();
+        start();
+    });
 }
 function notification(tickets) {
     let notification = document.createElement('div');

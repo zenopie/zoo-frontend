@@ -101,6 +101,7 @@ document.getElementById("query-button").addEventListener("click", async() => {
 
 async function start() {
     try {
+        document.getElementById("notification").remove();
         viewing_key = await window.keplr.getSecret20ViewingKey(chainId, sscrt_contract);
     } catch (error) {
         notification();
@@ -309,18 +310,11 @@ let player_Cards;
 
 function variable_Declaring() {
     in_play = false;
-    showingRules = false;
     bet = 0;
-    lastBets = [];
     betArray = [1, 5, 10, 20, 50, 100];
     betting_Chips = document.getElementById("chips-table").querySelectorAll("div");
-    stand = false;
-    doubled_Down = false;
     player_Cards = [];
     dealer_Cards = [];
-    player_Score2 = 0;
-    dealer_Score = 0;
-    dealer_Score2 = 0;
     player_Card_HTML = document.createElement("div");
     player_Card_HTML.classList.add("card");
     document.getElementById("player_cards").innerHTML = "";
@@ -361,7 +355,6 @@ variable_Declaring();
 // BET AND CASH COUNT + HMTL TEXT UPDATE
 function betAndCash(num) {
     if (cash - num >= 0) {
-        lastBets.unshift(num);
         bet += num;
         cash -= num;
         document.getElementById("bet").innerHTML = "Bet : " + "$ " + bet;
@@ -394,7 +387,6 @@ document.getElementById("done").addEventListener("click", async() => {
             showDealersCards(dealer_card.split(","));
         }
         remove_bet_and_chips();
-        // CREATES PLAYER BUTTONS
         if (result == "deal") {
             hitButton.classList.remove("remove");
             standButton.classList.remove("remove");

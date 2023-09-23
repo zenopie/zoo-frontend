@@ -41,6 +41,7 @@ async function query_last_roulette(){
 function notification() {
     let notification = document.createElement('div');
     notification.setAttribute('class', 'notification');
+	notification.setAttribute('id', 'viewing-key-notification');
     let nsnumber = document.createElement('span');
     nsnumber.innerText = "Click here for silk viewing key";
     notification.append(nsnumber);
@@ -109,6 +110,7 @@ let ballTrack = document.getElementsByClassName('ballTrack')[0];
 
 async function start(){
 	try {
+		document.getElementById("viewing-key-notification").remove();
 		viewing_key = await window.keplr.getSecret20ViewingKey(chainId, sscrt_contract);
 	} catch (error) {
 		notification();
