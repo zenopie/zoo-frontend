@@ -15,7 +15,7 @@ window.onload = async () => {
 };
 window.addEventListener("keplr_keystorechange", () => {
     console.log("changed accounts")
-    connectKeplr();
+    location.reload();
 })
 async function connectKeplr() {
     this.chainId = 'pulsar-3';
