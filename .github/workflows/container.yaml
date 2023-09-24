@@ -1,3 +1,4 @@
+name: build and push container
 on:
   push:
     branches: main
