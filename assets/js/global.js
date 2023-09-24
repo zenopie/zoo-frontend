@@ -39,8 +39,8 @@ async function connectKeplr() {
                 await window.keplr.experimentalSuggestChain({
                     chainId: this.chainId,
                     chainName: 'Secret Testnet',
-                    rpc: 'https://rpc.pulsar3.scrttestnet.com',
-                    rest: "https://api.pulsar3.scrttestnet.com",
+                    rpc: 'https://rpc.pulsar.scrttestnet.com',
+                    rest: "https://api.pulsar.scrttestnet.com",
                     bip44: {
                         coinType: 529,
                     },
@@ -92,7 +92,7 @@ async function connectKeplr() {
                 this.address = accounts[0].address;
 
                 window.secretjs = new SecretNetworkClient({
-                  url: "https://api.pulsar3.scrttestnet.com",
+                  url: "https://lcd.pulsar-3.secretsaturn.net",
                   chainId: this.chainId,
                   wallet: keplrOfflineSigner,
                   walletAddress: this.address,
