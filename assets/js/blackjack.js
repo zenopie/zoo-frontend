@@ -101,9 +101,9 @@ document.getElementById("query-button").addEventListener("click", async() => {
 
 async function start() {
     try {
-        document.getElementById("notification").remove();
         viewing_key = await window.keplr.getSecret20ViewingKey(chainId, sscrt_contract);
     } catch (error) {
+        console.log(error);
         notification();
         return;
     }

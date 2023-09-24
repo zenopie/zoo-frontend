@@ -1,9 +1,9 @@
 const { SecretNetworkClient, MsgExecuteContract } = window.secretjs;
 
 
-const lottery_contract =  "secret1ch6dauzce5hjs2umzcqykph8jh60a3vf2ntjv4";
-const lottery_hash =  "f75ec61ef437552f6d01c9b6ed465b873738852d1aeeacc4e6b888426ba4ba69";
-const sscrt_contract = 'secret1gvn6eap7xgsf9kydgmvpqwzkru2zj35ar2vncj';
+const lottery_contract =  "secret19gsyhqff3zx2f9j68gp6sjzqrve0z35yncu9gc";
+const lottery_hash =  "d08c13f21f9c8692b1297e982b3d8754e23b09d1f9a5a4b44a36d6e69e49dd96";
+const sscrt_contract = 'secret1p6r5zc8898c9h3zfssfxu2x75nz3t4z8q68w8t';
 const sscrt_hash = 'c74bc4b0406507257ed033caa922272023ab013b0c74330efc16569528fa34fe';
 
 let viewing_key;
@@ -92,7 +92,7 @@ async function connectKeplr() {
                 this.address = accounts[0].address;
 
                 window.secretjs = new SecretNetworkClient({
-                  url: "https://lcd.pulsar-3.secretsaturn.net",
+                  url: "https://api.pulsar.scrttestnet.com/",
                   chainId: this.chainId,
                   wallet: keplrOfflineSigner,
                   walletAddress: this.address,
@@ -111,6 +111,7 @@ async function connectKeplr() {
     if (this.address) {
         try {
             start();
+            console.log("test");
         } catch (error) {
             console.log(error);
         }

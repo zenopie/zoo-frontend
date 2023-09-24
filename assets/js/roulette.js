@@ -110,9 +110,9 @@ let ballTrack = document.getElementsByClassName('ballTrack')[0];
 
 async function start(){
 	try {
-		document.getElementById("viewing-key-notification").remove();
 		viewing_key = await window.keplr.getSecret20ViewingKey(chainId, sscrt_contract);
 	} catch (error) {
+		console.log(error);
 		notification();
 		return;
 	}

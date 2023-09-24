@@ -115,9 +115,9 @@ async function start(){
         tickets_box.append(bank);
     }
     try {
-        document.getElementById("notification").remove();
         viewing_key = await window.keplr.getSecret20ViewingKey(chainId, sscrt_contract);
     } catch (error) {
+        console.log(error);
         vkNotification();
         return;
     }
