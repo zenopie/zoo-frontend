@@ -111,7 +111,6 @@ async function connectKeplr() {
     if (this.address) {
         try {
             start();
-            console.log("test");
         } catch (error) {
             console.log(error);
         }
