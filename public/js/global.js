@@ -1,4 +1,24 @@
+const { SecretNetworkClient, MsgExecuteContract } = window.secretjs;
+
+
+const zoo_contract =  "secret1mj9utpjltxsdgcamjmsujq8tnezrk543ppk0rj";
+const zoo_hash =  "00d7881854b00f7214c3ae1c275ca2ae16f79be6f52946a7c9bc5ef2b17b70e5";
+const snip_contract = 'secret1p6r5zc8898c9h3zfssfxu2x75nz3t4z8q68w8t';
+const snip_hash = 'c74bc4b0406507257ed033caa922272023ab013b0c74330efc16569528fa34fe';
+const decimal = 1000000;
+
+let viewing_key;
+let snip_balance;
+
+
 window.onload = async () => {
+    connectKeplr();
+};
+window.addEventListener("keplr_keystorechange", () => {
+    console.log("changed accounts")
+    location.reload(true);
+})
+async function connectKeplr() {
     this.chainId = 'pulsar-3';
 
     // Keplr extension injects the offline signer that is compatible with cosmJS.
@@ -20,8 +40,8 @@ window.onload = async () => {
                 await window.keplr.experimentalSuggestChain({
                     chainId: this.chainId,
                     chainName: 'Secret Testnet',
-                    rpc: 'https://rpc.pulsar3.scrttestnet.com',
-                    rest: "https://api.pulsar3.scrttestnet.com",
+                    rpc: 'https://rpc.pulsar.scrttestnet.com',
+                    rest: "https://api.pulsar.scrttestnet.com",
                     bip44: {
                         coinType: 529,
                     },
@@ -73,7 +93,7 @@ window.onload = async () => {
                 this.address = accounts[0].address;
 
                 window.secretjs = new SecretNetworkClient({
-                  url: "https://api.pulsar3.scrttestnet.com",
+                  url: "https://api.pulsar.scrttestnet.com/",
                   chainId: this.chainId,
                   wallet: keplrOfflineSigner,
                   walletAddress: this.address,
@@ -91,40 +111,11 @@ window.onload = async () => {
 
     if (this.address) {
         try {
-            viewing_key = await window.keplr.getSecret20ViewingKey(chainId, sscrt_contract);
-            console.log(viewing_key);
+            start();
         } catch (error) {
             console.log(error);
-         
         }
     } else {
         console.log("error connecting to keplr");
     }
-};
-
-async function wrap(){
-    let number = document.getElementById("numberInput").value
-	let msg = new MsgExecuteContract({
-		sender: secretjs.address,
-		contract_address: sscrt_contract,
-    	code_hash: sscrt_hash,
-		msg: {
-			deposit: {},
-		},
-        sent_funds: [
-            {
-              "amount": (number * 1000000).toString(),
-              "denom": "uscrt"
-            }
-          ],
-	});
-	let tx = await secretjs.tx.broadcast([msg], {
-		gasLimit: 250_000,
-		gasPriceInFeeDenom: 0.1,
-		feeDenom: "uscrt",
-        
-	});
-    console.log("transaction log");
-	console.log(tx);
-    snip_balance += number;
-};
+}

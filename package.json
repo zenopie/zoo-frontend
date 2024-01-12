@@ -1,0 +1,14 @@
+{
+  "name": "zoo-frontend",
+  "version": "1.0.0",
+  "description": "static frontend for zoo casino",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zenopie",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

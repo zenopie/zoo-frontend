@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoo Casino</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <script src="https://www.unpkg.com/secretjs/dist/browser.js"></script>
+    <script src="js/global.js"></script>
+
+    <div class="sidenav">
+        <ul>
+            <li>
+                <a href="/index.html">
+                    <img class="logo" src="images/zoo.svg" alt="Zoo Logo">
+                </a>
+            </li>
+            <li>
+                <a href="/index.html">
+                    <img id="roulette" src="images/roulette.svg" alt="Roulette">
+                </a>
+            </li>
+    </div>
+    <ul class="topnav">
+		<li class="topnavli"><a id="table-nav" class="active" href="#table">Table</a></li>
+		<li class="topnavli"><a id="rules-nav" href="#rules">Rules</a></li>
+		<li class="topnavli"><a id="history-nav" href="#history">Last Spin</a></li>
+	</ul>
+	<div id="show-rules" class="show-rules remove">
+		<h1>BET TYPES AND PAYOUTS</h1>
+		<h3>House Edge 2.70%</h3>
+        <p>Single number bet pays 35 to 1. Also called “straight up.”</p>
+        <p>Double number bet pays 17 to 1. Also called a “split.”</p>
+		<p>Three number bet pays 11 to 1. Also called a “street.”</p>
+		<p>Four number bet pays 8 to 1. Also called a “corner bet.”</p>
+		<p>Six number bets pays 5 to 1. Example: 7, 8, 9, 10, 11, 12. Also called a “line.”</p>
+		<p>Twelve numbers or dozens (first, second, third dozen) pays 2 to 1.</p>
+        <p>Column bet (12 numbers in a row) pays 2 to 1. </p>
+		<p>18 numbers (1-18),(19-36) pays even money. </p>
+		<p>Red or black pays even money.</p>
+        <p>Odd or even bets pay even money.</p>
+	</div>
+	<div id="history-box" class="show-rules remove">
+		<h1>LAST SPIN</h1>
+		<div id="betAlert" class="cover">
+			<p>Get History</p>
+			<div>
+				<button id="query-button">Query</button>
+			</div>
+		</div>
+	</div>
+	<script src="js/roulette.js"></script>
+</body>
+
+</body>
+</html>

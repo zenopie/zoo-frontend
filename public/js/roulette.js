@@ -26,8 +26,8 @@ document.getElementById("history-nav").addEventListener("click", async() => {
 
 async function query_last_roulette(){
 	let query = await secretjs.query.compute.queryContract({
-	  contract_address: lottery_contract,
-	  code_hash: lottery_hash,
+	  contract_address: zoo_contract,
+	  code_hash: zoo_hash,
 	  query: {
 		  last_roulette: {
 			address: window.secretjs.address
@@ -48,7 +48,7 @@ function notification() {
     let raffle_box = document.getElementById("table");
     raffle_box.prepend(notification);
     notification.addEventListener("click", async() => {
-        await window.keplr.suggestToken(chainId, sscrt_contract);
+        await window.keplr.suggestToken(chainId, snip_contract);
         notification.remove();
         start();
     });
@@ -110,19 +110,19 @@ let ballTrack = document.getElementsByClassName('ballTrack')[0];
 
 async function start(){
 	try {
-		viewing_key = await window.keplr.getSecret20ViewingKey(chainId, sscrt_contract);
+		viewing_key = await window.keplr.getSecret20ViewingKey(chainId, snip_contract);
 	} catch (error) {
 		console.log(error);
 		notification();
 		return;
 	}
-	bankValue = await querySscrt();
+	bankValue = await querySnip();
 	resetGame();
 }
-async function querySscrt(){
-	let sscrt_info = await window.secretjs.query.compute.queryContract({
-	  contract_address: sscrt_contract,
-	  code_hash: sscrt_hash,
+async function querySnip(){
+	let snip_info = await window.secretjs.query.compute.queryContract({
+	  contract_address: snip_contract,
+	  code_hash: snip_hash,
 	  query: {
 		  balance: {
 			  address: window.secretjs.address,
@@ -131,7 +131,7 @@ async function querySscrt(){
 		  }
 	  }
 	});
-	snip_balance = Math.floor(sscrt_info.balance.amount / 1000000);
+	snip_balance = Math.floor(snip_info.balance.amount / decimal);
 	return(snip_balance);
 };
 
@@ -142,19 +142,19 @@ async function enter(bets, amount){
 	let hookmsg64 = btoa(JSON.stringify(hookmsg));
 	let msg = new MsgExecuteContract({
 		sender: secretjs.address,
-		contract_address: sscrt_contract,
-    code_hash: sscrt_hash,
+		contract_address: snip_contract,
+    	code_hash: snip_hash,
 		msg: {
 			send: {
-				recipient: lottery_contract,
-        code_hash: lottery_hash,
-				amount: (amount * 1000000).toString(),
+				recipient: zoo_contract,
+        		code_hash: zoo_hash,
+				amount: (amount * decimal).toString(),
 				msg: hookmsg64,
 			}
 		}
 	});
 	let tx = await secretjs.tx.broadcast([msg], {
-		gasLimit: 1_000_000,
+		gasLimit: 600_000,
 		gasPriceInFeeDenom: 0.1,
 		feeDenom: "uscrt",
 	});
@@ -179,7 +179,7 @@ async function enter(bets, amount){
 
 
 async function resetGame(){
-	bankValue =  await querySscrt();
+	bankValue =  await querySnip();
 	currentBet = 0;
 	wager = 5;
 	bet = [];
