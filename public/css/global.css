@@ -34,7 +34,6 @@ html, body{
 	display: block;
 	width: 100px;
 	margin: auto;
-	filter: invert(100%);
 }
 
 
