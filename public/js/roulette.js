@@ -154,7 +154,7 @@ async function enter(bets, amount){
 		}
 	});
 	let tx = await secretjs.tx.broadcast([msg], {
-		gasLimit: 600_000,
+		gasLimit: 1_200_000,
 		gasPriceInFeeDenom: 0.1,
 		feeDenom: "uscrt",
 	});
