@@ -30,7 +30,7 @@ async function connectKeplr() {
     const accounts = await keplrOfflineSigner.getAccounts();
     this.address = accounts[0].address;
 
-    const url = "https://lcd.secret.express";
+    const url = "https://lcd.mainnet.secretsaturn.net";
 
     window.secretjs = new SecretNetworkClient({
         url,
